@@ -2,11 +2,12 @@
 #include <functional>
 #include <algorithm>
 #include <assert.h>
-using namespace std;
 
-vector<Pet> PetStore::generalSort(MaiMicF maiMicF) const {
-	vector<Pet> v{ rep.getAll() };//fac o copie	
-	sort(v.begin(), v.end(), maiMicF);
+
+std::vector<Pet> PetStore::generalSort(MaiMicF maiMicF) const {
+
+	std::vector<Pet> v{ rep.getAll() };//fac o copie	
+	std::sort(v.begin(), v.end(), maiMicF);
 	//for (size_t i = 0; i < v.size(); i++) {
 	//	for (size_t j = i + 1; j < v.size(); j++) {
 	//		if (!maiMicF(v[i], v[j])) {
@@ -24,7 +25,7 @@ vector<Pet> PetStore::generalSort(MaiMicF maiMicF) const {
 Adauga un nou pet
 arunca exceptie daca: nu se poate salva, nu este valid
 */
-void PetStore::addPet(const string& type, const string& species, int price) {
+void PetStore::addPet(const std::string& type, const std::string& species, int price) {
 	Pet p{ type,species,price };
 	val.validate(p);
 	rep.store(p);
@@ -33,14 +34,14 @@ void PetStore::addPet(const string& type, const string& species, int price) {
 /*
 Sorteaza dupa tip
 */
-vector<Pet> PetStore::sortByType()const {
+std::vector<Pet> PetStore::sortByType()const {
 	return generalSort(cmpType);
 }
 
 /*
 Sorteaza dupa species
 */
-vector<Pet> PetStore::sortBySpecies()const {
+std::vector<Pet> PetStore::sortBySpecies()const {
 	//return generalSort(cmpSpecies);
 	
 
@@ -53,7 +54,7 @@ vector<Pet> PetStore::sortBySpecies()const {
 /*
 Sorteaza dupa species+price
 */
-vector<Pet> PetStore::sortBySpeciesPrice() const {
+std::vector<Pet> PetStore::sortBySpeciesPrice() const {
 	return generalSort([](const Pet&p1, const Pet&p2) {
 		if (p1.getSpecies() == p2.getSpecies()) {
 			return p1.getPrice() < p2.getPrice();
@@ -62,8 +63,8 @@ vector<Pet> PetStore::sortBySpeciesPrice() const {
 	});	
 }
 
-vector<Pet> PetStore::filtreaza(function<bool(const Pet&)> fct) const {
-	vector<Pet> rez;
+std::vector<Pet> PetStore::filtreaza(std::function<bool(const Pet&)> fct) const {
+	std::vector<Pet> rez;
 	for (const auto& pet : rep.getAll()) {
 		if (fct(pet)) {
 			rez.push_back(pet);
@@ -72,13 +73,13 @@ vector<Pet> PetStore::filtreaza(function<bool(const Pet&)> fct) const {
 	return rez;
 }
 
-vector<Pet> PetStore::filtrarePretMaiMic(int pret) const {
+std::vector<Pet> PetStore::filtrarePretMaiMic(int pret) const {
 	return filtreaza([pret](const Pet& p)noexcept {
 		return p.getPrice() < pret;
 	});
 }
 
-vector<Pet> PetStore::filtrarePret(int pretMin, int pretMax)const {
+std::vector<Pet> PetStore::filtrarePret(int pretMin, int pretMax)const {
 
 	return filtreaza([=](const Pet& p) noexcept {
 		return p.getPrice() >= pretMin && p.getPrice() <= pretMax;

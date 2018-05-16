@@ -2,17 +2,17 @@
 #include <string>
 #include "Pet.h"
 #include <vector>
-using namespace std;
+
 
 class ValidateException {
-	vector<string> msgs;
+	std::vector<std::string> msgs;
 public:
-	ValidateException(const vector<string>& errors) :msgs{ errors } {}
+	ValidateException(const std::vector<std::string>& errors) :msgs{ errors } {}
 	//functie friend (vreau sa folosesc membru privat msg)
-	friend ostream& operator<<(ostream& out, const ValidateException& ex);
+	friend std::ostream& operator<<(std::ostream& out, const ValidateException& ex);
 };
 
-ostream& operator<<(ostream& out, const ValidateException& ex);
+std::ostream& operator<<(std::ostream& out, const ValidateException& ex);
 
 class PetValidator {
 public:

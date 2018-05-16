@@ -2,24 +2,25 @@
 #include <string>
 #include <iostream>
 
-using namespace std;
 
 class Pet {
 	std::string type;
 	std::string species;
 	int price;
 public:
-	Pet(const string t, const string s, int p):type{t},species{s},price{p}{}
+	//Constructor cu liste de initializare
+	Pet(const std::string t, const std::string s, int p):type{t},species{s},price{p}{}
 
 	/*Pet(const Pet& ot):type{ ot.type }, species{ ot.species }, price{ ot.price } {
 		cout << "!!!!!!!!!!!!!!!!!!!!\n";
 	}*/
 	
 
-	string getType() const {
+	std::string getType() const {
 		return type;
 	}
-	string getSpecies() const {
+
+	std::string getSpecies() const {
 		return species;
 	}
 

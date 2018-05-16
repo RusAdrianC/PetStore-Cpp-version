@@ -8,7 +8,7 @@
 #include <functional>
 #include "validator.h"
 
-using namespace std;
+
 
 typedef bool(*MaiMicF)(const Pet&, const Pet&);
 
@@ -23,14 +23,14 @@ class PetStore {
 			  - poate fi functie lambda (care nu capteaza nimic in capture list)
 	 returneaza o lista sortata dupa criteriu dat ca paramatru
 	*/
-	vector<Pet> generalSort(MaiMicF maiMicF)const;
+	std::vector<Pet> generalSort(MaiMicF maiMicF)const;
 	/*
 	Functie generala de filtrare
 	fct - poate fi o functie 
 	fct - poate fi lambda, am folosit function<> pentru a permite si functii lambda care au ceva in capture list
 	returneaza doar animalele care trec de filtru (fct(pet)==true)
 	*/
-	vector<Pet> filtreaza(function<bool(const Pet&)> fct)const;
+	std::vector<Pet> filtreaza(std::function<bool(const Pet&)> fct)const;
 public:
 	PetStore(PetRepo& rep, PetValidator& val) noexcept:rep{ rep }, val{ val } {
 	}
@@ -39,40 +39,40 @@ public:
 	/*
 	 returneaza toate animalele in ordinea in care au fost adaugate
 	*/
-	const vector<Pet>& getAll() const noexcept{
+	const std::vector<Pet>& getAll() const noexcept{
 		return rep.getAll();
 	}
 	/*
 	Adauga un nou pet
 	arunca exceptie daca: nu se poate salva, nu este valid
 	*/
-	void addPet(const string& type, const string& species, int price);
+	void addPet(const std::string& type, const std::string& species, int price);
 
 	/*
 	Sorteaza dupa tip
 	*/
-	vector<Pet> sortByType()const;
+	std::vector<Pet> sortByType()const;
 
 	/*
 	Sorteaza dupa species
 	*/
-	vector<Pet> sortBySpecies()const;
+	std::vector<Pet> sortBySpecies()const;
 
 
 	/*
 	Sorteaza dupa species+price
 	*/
-	vector<Pet> sortBySpeciesPrice() const;
+	std::vector<Pet> sortBySpeciesPrice() const;
 
 	/*
 	returneaza doar animalele cu pret mai mic decat cel dat
 	*/
-	vector<Pet> filtrarePretMaiMic(int pret)const;
+	std::vector<Pet> filtrarePretMaiMic(int pret)const;
 
 	/*
 	returneaza doar animalele cu pret intre cele doua preturi
 	*/
-	vector<Pet> filtrarePret(int pretMin, int pretMax)const;
+	std::vector<Pet> filtrarePret(int pretMin, int pretMax)const;
 
 };
 void testCtr();

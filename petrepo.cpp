@@ -1,5 +1,7 @@
 #include "petrepo.h"
 #include <assert.h>
+
+
 void PetRepo::store(const Pet& p)
 {
 	if (exist(p)) {
@@ -21,7 +23,7 @@ bool PetRepo::exist(const Pet& p) {
 Cauta
 arunca exceptie daca nu exista animal
 */
-Pet PetRepo::find(const string& type,const string& species) const{
+Pet PetRepo::find(const std::string& type, const std::string& species) const {
 	for (const Pet& p : all) {
 		if (p.getType() == type && p.getSpecies() == species) {
 			return p;
@@ -34,12 +36,12 @@ Pet PetRepo::find(const string& type,const string& species) const{
 /*
 returneaza toate animalele salvate
 */
-const vector<Pet>& PetRepo::getAll() const noexcept{
+const std::vector<Pet>& PetRepo::getAll() const noexcept{
 	return all;
 }
 
 
-ostream& operator<<(ostream& out, const PetRepoException& ex) {
+std::ostream& operator<<(std::ostream& out, const PetRepoException& ex) {
 	out << ex.msg;
 	return out;
 }
@@ -49,8 +51,11 @@ ostream& operator<<(ostream& out, const PetRepoException& ex) {
 
 void testAdauga() {
 	PetRepo rep;
+	//salvare pet
 	rep.store(Pet{ "a","a",4 });
+	//verifica daca este doar 1 animal
 	assert(rep.getAll().size() == 1);
+	//cauta animalu cu specia respectiva 
 	assert(rep.find("a", "a").getSpecies() == "a");
 
 	rep.store(Pet{ "b","b",4 });
@@ -68,10 +73,12 @@ void testAdauga() {
 
 void testCauta() {
 	PetRepo rep;
+	//salvam animale
 	rep.store(Pet{ "a","a",4 });
 	rep.store(Pet{ "b","b",4 });
 
 	auto p = rep.find("a", "a");
+	///sau rep.find("a", "a").getSpecies() == "a);
 	assert(p.getSpecies() == "a");
 	assert(p.getType() == "a");
 

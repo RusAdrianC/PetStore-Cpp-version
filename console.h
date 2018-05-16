@@ -11,7 +11,7 @@ class ConsolUI {
 	/*
 	Tipareste o lista de animale la consola
 	*/
-	void tipareste(const vector<Pet>& pets);
+	void tipareste(const std::vector<Pet>& pets);
 
 public:
 

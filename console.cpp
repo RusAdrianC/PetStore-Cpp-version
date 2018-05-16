@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void ConsolUI::tipareste(const vector<Pet>& pets) {
+void ConsolUI::tipareste(const std::vector<Pet>& pets) {
 	cout << "Animale:\n";
 	for (const auto& pet : pets) {
 		cout << ' ' << pet.getType() << ' ' << pet.getSpecies() << ' ' << pet.getPrice() << '\n';
