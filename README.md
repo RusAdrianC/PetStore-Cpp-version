@@ -1,2 +1,2 @@
 # PetStore-Cpp-version
-Gestionarea unui magazin de animale (Varianta C++ ( OOP)).
+Managing a pet shop (C++ version (OOP)).
